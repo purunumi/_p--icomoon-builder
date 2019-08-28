@@ -16,7 +16,7 @@ function serve(){
     })
 }
 
-function styles(){
+async function styles(){
     return gulp.src('./src/scss/main.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
@@ -25,37 +25,31 @@ function styles(){
         .pipe(gulp.dest('./src/css'));
 }
 
-function glyph(){
-    // node lib/builder export test-font ./examples/test.zip ./test/scss ./test/css ./test/fonts ./test/docs ./test/liga
-    // icomoon.exports();
+async function glyph(){
+    let fontName, icomoonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath, minifyCss;
 
-    let fontName, icomoonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath;
-
-    fontName = 'test-font';
+    fontName = 'glyphicon';
     icommonZipFile = path.resolve('test.zip');
-    preProcessorPath = path.resolve('../test/scss');
-    cssPath = path.resolve('../test/css');
-    fontPath = path.resolve('../test/fonts');
-    docsPath = path.resolve('../test/docs');
-    ligaPath = path.resolve('../test/liga');
+    preProcessorPath = path.resolve('./scss/base/fonts/glyphicon');
+    cssPath = path.resolve('./css');
+    fontPath = path.resolve('./fonts/glyphicon');
+    docsPath = path.resolve('./docs');
+    ligaPath = path.resolve('./js/liga');
+    minifyCss = 'Y';
 
-    // Do you want to proceed? // after table
-    // minify scss
-
-    // var cmd = new run.Command(
-    //     `node ../lib/export export ${fontName} ${icommonZipFile} ${preProcessorPath} ${cssPath} ${fontPath} ${docsPath} ${ligaPath}`
-    // );
-    // cmd.exec();
-    return run(
-        `node ${path.resolve('../lib/builder export')} ${fontName} ${icommonZipFile} ${preProcessorPath} ${cssPath} ${fontPath} ${docsPath} ${ligaPath}`
-    ).exec();
+    var cmd = new run.Command(
+        `node ${path.resolve('../lib/builder export')} ${fontName} ${icommonZipFile} ${preProcessorPath} ${cssPath} ${fontPath} ${docsPath} ${ligaPath}`,
+        {verbosity: 0}
+    );
+    cmd.exec(`Y | ${minifyCss}`);
 }
 
-function watch(){
+async function watch(){
     //
 }
 
 exports.watch = watch;
 // exports.default = gulp.series(serve, gulp.parallel(watch));
 exports.glyph = glyph;
+
 exports.default = glyph;
