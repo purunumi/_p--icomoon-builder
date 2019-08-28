@@ -30,11 +30,11 @@ async function glyph(){
 
     fontName = 'glyphicon';
     icommonZipFile = path.resolve('test.zip');
-    preProcessorPath = path.resolve('./scss/base/fonts/glyphicon');
-    cssPath = path.resolve('./css');
-    fontPath = path.resolve('./fonts/glyphicon');
-    docsPath = path.resolve('./docs');
-    ligaPath = path.resolve('./js/liga');
+    preProcessorPath = path.resolve('./src/scss/base/fonts/glyphicon');
+    cssPath = path.resolve('./src/css');
+    fontPath = path.resolve('./src/fonts/glyphicon');
+    docsPath = path.resolve('./src/docs');
+    ligaPath = path.resolve('./src/js/liga');
     minifyCss = 'Y';
 
     var cmd = new run.Command(
