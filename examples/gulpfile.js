@@ -26,16 +26,15 @@ function styles(){
 }
 
 function glyphicon(){
-    let fontName, icomoonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath, minifyCss;
+    let fontName, icomoonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath;
 
     fontName = 'glyphicon';
-    icommonZipFile = path.resolve('test.zip');
+    icommonZipFile = path.resolve('icomoon.zip');
     preProcessorPath = path.resolve('./src/scss/base/fonts/glyphicon');
     cssPath = path.resolve('./src/css');
     fontPath = path.resolve('./src/fonts/glyphicon');
     docsPath = path.resolve('./src/docs');
     ligaPath = path.resolve('./src/js/liga');
-    minifyCss = 'Y';
 
     cp.fork(path.resolve('../lib/builder'), ['export', fontName, icommonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath])
 }
