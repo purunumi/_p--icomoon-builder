@@ -29,7 +29,7 @@ When running:
 
 ```bash
 cd your/path/to/fancy-icons-project/
-node node_modules/.bin/icomoon-builder export fancy-icons ~/Downloads/icomoon.zip scss css fonts docs
+node your/path/to/_p--icomoon-builder/lib/builder export fancy-icons ~/Downloads/icomoon.zip scss css fonts docs
 ```
 
 We will obtain:
