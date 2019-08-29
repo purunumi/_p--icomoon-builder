@@ -1,3 +1,4 @@
+const cp = require('child_process');
 const path = require('path');
 const gulp = require('gulp');
 const run = require('gulp-run');
@@ -38,17 +39,7 @@ function glyph(){
     ligaPath = path.resolve('./src/js/liga');
     minifyCss = 'Y';
 
-    var cmd = new run.Command(
-        `node ${path.resolve('../lib/builder export ')} ${fontName} ${icommonZipFile} ${preProcessorPath} ${cssPath} ${fontPath} ${docsPath} ${ligaPath}  --force`,
-        {verbosity: 3}
-    );
-    return cmd.exec();
-
-    // return run(`node ${path.resolve('../lib/builder export')} ${fontName} ${icommonZipFile} ${preProcessorPath} ${cssPath} ${fontPath} ${docsPath} ${ligaPath}`).exec().pipe();
-
-    // shell.task(`node ${path.resolve('../lib/builder export')} ${fontName} ${icommonZipFile} ${preProcessorPath} ${cssPath} ${fontPath} ${docsPath} ${ligaPath}`);
-
-    // return gulp.src('../lib/builder.js').pipe(run(`node ${path.resolve('../lib/builder export')} ${fontName} ${icommonZipFile} ${preProcessorPath} ${cssPath} ${fontPath} ${docsPath} ${ligaPath}`).exec());
+    cp.fork(path.resolve('../lib/builder'), ['export', fontName, icommonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath])
 }
 
 async function watch(){
