@@ -1,8 +1,6 @@
 const cp = require('child_process');
 const path = require('path');
 const gulp = require('gulp');
-const run = require('gulp-run');
-// const shell = require('gulp-shell');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const icomoon = require('../lib/export');
@@ -18,7 +16,7 @@ function serve(){
     })
 }
 
-async function styles(){
+function styles(){
     return gulp.src('./src/scss/main.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({outputStyle:'compressed'}).on('error', sass.logError))
@@ -27,7 +25,7 @@ async function styles(){
         .pipe(gulp.dest('./src/css'));
 }
 
-function glyph(){
+function glyphicon(){
     let fontName, icomoonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath, minifyCss;
 
     fontName = 'glyphicon';
@@ -42,12 +40,12 @@ function glyph(){
     cp.fork(path.resolve('../lib/builder'), ['export', fontName, icommonZipFile, preProcessorPath, cssPath, fontPath, docsPath, ligaPath])
 }
 
-async function watch(){
+function watch(){
     //
 }
 
 exports.watch = watch;
 // exports.default = gulp.series(serve, gulp.parallel(watch));
-exports.glyph = glyph;
+exports.glyphicon = glyphicon;
 
-exports.default = glyph;
+exports.default = serve;
