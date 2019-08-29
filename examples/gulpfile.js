@@ -41,11 +41,11 @@ function glyphicon(){
 }
 
 function watch(){
-    //
+    gulp.watch('./src/scss/**/*.scss', styles);
 }
 
 exports.watch = watch;
-// exports.default = gulp.series(serve, gulp.parallel(watch));
 exports.glyphicon = glyphicon;
+// exports.build = gulp.series(sprite, images, gulp.parallel(styles, scripts));
 
-exports.default = serve;
+exports.default = gulp.series(serve, gulp.parallel(watch));
